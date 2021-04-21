@@ -1,0 +1,18 @@
+# the path of this file on the DC machine is /etc/hosts.more
+
+# dnsmasq IPv4 <host, IP> map
+100.100.6.2	web-server
+100.100.6.3	proxy-server
+
+100.100.4.100	client-ext-1
+100.100.4.10	fantastic-coffee
+
+100.100.2.254	arp-watch
+
+100.100.1.2	domain-controller
+100.100.1.3	log-server
+
+# dnsmasq IPv6 <host, IP> map
+# still work in progress, just to test
+
+2001:470:b5b8:1901::2000	client-ext-1
