@@ -13,9 +13,11 @@ done
 
 mask=$(echo $ip6 | cut -d/ -f2)
 ip=$(echo $ip6 | cut -d/ -f1)
-echo $mask
-echo $ip
+#echo $mask
+#echo $ip
 
+ip=$(sipcalc $ip | fgrep Expanded | cut -d '-' -f 2)
+#echo $ip
 
 prefix_len=0
 
@@ -29,4 +31,12 @@ for i in "${part[@]}"; do
     fi
 done
 
-echo $prefix
+#echo $prefix
+
+prefix=$(echo $prefix | rev | cut -c 4- | rev )
+#echo $prefix
+touch -f hosts.ipv6
+echo "# IPv6 <host, IP> map " > hosts.ipv6
+while IFS= read -r line; do
+    echo  "$prefix$line" >> hosts.ipv6
+done < EUI64-ips

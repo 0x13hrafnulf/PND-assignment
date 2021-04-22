@@ -1,11 +1,8 @@
 00:40fa:57ff:fe4a:2073		web-server
 00:8410:9bff:fe35:525c		proxy-server
-
 01:e480:50ff:fe76:1546		client-ext-1
-
 11:14cd:d6ff:fe00:4e4c		log-server
 11:4c34:16ff:fe3d:beb3		domain-controller
 11:4018:a7ff:fea0:a2df		gsm-ce
-
 12:b89d:d3ff:feec:ea07		arp-watch
 12:e480:50ff:fe76:1546		internal-client
