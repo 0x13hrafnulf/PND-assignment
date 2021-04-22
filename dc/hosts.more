@@ -7,6 +7,7 @@
 100.100.4.100	client-ext-1
 100.100.4.10	fantastic-coffee
 
+100.100.2.100	kali
 100.100.2.254	arp-watch
 
 100.100.1.2	domain-controller
