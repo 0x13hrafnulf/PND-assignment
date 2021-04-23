@@ -31,8 +31,8 @@ echo $mask
 ip=$(sipcalc $ip | fgrep Expanded | cut -d '-' -f 2)
 #echo $ip
 
-touch -f "/etc/dnsmasq.d/dnsmasq-ipv6.more.conf"
-echo "listen-address=$ip"  > "/etc/dnsmasq.d/dnsmasq-ipv6.more.conf"
+sudo touch -f "/etc/dnsmasq.d/dnsmasq-ipv6.more.conf"
+echo "listen-address=$ip" | sudo tee "/etc/dnsmasq.d/dnsmasq-ipv6.more.conf" > "/dev/null"
 
 prefix_len=0
 
@@ -50,8 +50,8 @@ done
 
 prefix=$(echo $prefix | rev | cut -c 4- | rev )
 #echo $prefix
-touch -f "/etc/hosts.ipv6"
-echo "# IPv6 <host, IP> map " > "/etc/hosts.ipv6"
+sudo touch -f "/etc/hosts.ipv6"
+echo "# IPv6 <host, IP> map " | sudo tee "/etc/hosts.ipv6" > "/dev/null"
 while IFS= read -r line; do
-    echo  "$prefix$line" >> "/etc/hosts.ipv6"
+    echo  "$prefix$line" | sudo tee -a "/etc/hosts.ipv6" > "/dev/null"
 done < "/etc/dnsmasq.d/EUI64-ips"
