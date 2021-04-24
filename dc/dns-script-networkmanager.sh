@@ -1,10 +1,15 @@
 #!/bin/bash -e
 
-#add job to cron via:
-#sudo crontab -e
-#then add line:
-#*/1 * * * * /path/dns-script.sh 2>&1 | logger -t dns-script
+interface=$1
+event=$2
 
+echo "$interface received $event" | systemd-cat -p info -t dispatch_script
+
+if [[ $interface != "eth0" ]] && ( [[ $event != "up" ]] || [[ $event != "dhcp6-change" ]] )
+then
+  echo "$interface $event"
+  exit 0
+fi
 
 
 ip6=$(ip -o -6 addr list eth0 | awk '{print $4}' | cut -f1)
@@ -40,7 +45,6 @@ for i in "${part[@]}"; do
 done
 
 #echo $prefix
-
 
 #note that this version uses pipes
 #Sometimes it might be the case to "tee" command for that purpose
