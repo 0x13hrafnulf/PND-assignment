@@ -70,5 +70,6 @@ then
     while IFS= read -r line; do
         echo  "$prefix$line">> "/path/hosts.ipv6"
     done < "/path/EUI64-ips"
+    /etc/init.d/dnsmasq restart
 fi
 
