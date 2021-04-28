@@ -53,15 +53,18 @@ fi
 
 header=$(head -n 1 "/path/hosts.ipv6")
 header=$(echo $header | cut -d# -f2)
-echo $header
+header=$(echo $header | rev | cut -c 1- | rev )
+#echo $header
+
+prefix=$(echo $prefix | rev | cut -c 4- | rev )
+#echo $prefix
 
 if [[ "$header" != "$prefix" ]];
 then
     touch -f "/path/dnsmasq-ipv6.more.conf"
     echo "listen-address=$ip" > "/path/dnsmasq-ipv6.more.conf"
 
-    prefix=$(echo $prefix | rev | cut -c 4- | rev )
-    #echo $prefix
+    
     echo "# $prefix" > "/path/hosts.ipv6"
     while IFS= read -r line; do
         echo  "$prefix$line">> "/path/hosts.ipv6"
